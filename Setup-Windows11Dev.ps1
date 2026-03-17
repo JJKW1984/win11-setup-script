@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+#Requires -Version 7.0
 <#
 .SYNOPSIS
     Windows 11 Developer Setup Script
@@ -17,11 +17,15 @@
           * Productivity           (browsers, Postman, PowerToys, 7-Zip ...)
 
 .NOTES
-    Run as Administrator.
+    Run as Administrator in PowerShell 7+.
+    Install PowerShell 7: winget install --id Microsoft.PowerShell
     Requires winget (App Installer) - shipped with Windows 11 by default.
 
 .EXAMPLE
-    # Run from an elevated PowerShell terminal:
+    # Install PowerShell 7 first (from an elevated Windows PowerShell prompt):
+    winget install --id Microsoft.PowerShell --silent --accept-package-agreements
+
+    # Then run from an elevated PowerShell 7 terminal:
     Set-ExecutionPolicy Bypass -Scope Process -Force
     .\Setup-Windows11Dev.ps1
 #>
@@ -68,7 +72,7 @@ function Assert-Administrator {
     $principal = [Security.Principal.WindowsPrincipal]$identity
     if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         Write-Err 'This script must be run as Administrator.'
-        Write-Host '  Right-click PowerShell -> "Run as administrator", then try again.' -ForegroundColor DarkYellow
+        Write-Host '  Right-click "PowerShell 7" -> "Run as administrator", then try again.' -ForegroundColor DarkYellow
         exit 1
     }
 }

@@ -23,7 +23,11 @@ It features an interactive menu so you can pick exactly what you need.
 ## Requirements
 
 - **Windows 11** (Windows 10 may work for most features)
-- **Administrator privileges**
+- **PowerShell 7+** — required. Install it first if not already present:
+  ```powershell
+  winget install --id Microsoft.PowerShell --silent --accept-package-agreements
+  ```
+- **Administrator privileges** — right-click "PowerShell 7" → "Run as administrator"
 - **winget** (App Installer) — ships with Windows 11 by default.  
   If missing, install from the [Microsoft Store](https://apps.microsoft.com/detail/9nblggh4nns1) or via [aka.ms/getwinget](https://aka.ms/getwinget).
 
@@ -31,7 +35,7 @@ It features an interactive menu so you can pick exactly what you need.
 
 ## Quick Start
 
-Open **PowerShell as Administrator** and run:
+Open **PowerShell 7 as Administrator** and run:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
