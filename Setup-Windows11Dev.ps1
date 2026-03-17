@@ -247,8 +247,17 @@ function Invoke-Debloat {
         '\Microsoft\Windows\Windows Error Reporting\QueueReporting'
     )
     foreach ($task in $tasks) {
+        $taskPath = Split-Path $task
+        $taskName = Split-Path $task -Leaf
+
+        if (-not $taskPath) {
+            $taskPath = "\"
+        } elseif (-not $taskPath.EndsWith("\")) {
+            $taskPath += "\"
+        }
+
         try {
-            Disable-ScheduledTask -TaskName $task -ErrorAction Stop | Out-Null
+            Disable-ScheduledTask -TaskPath $taskPath -TaskName $taskName -ErrorAction Stop | Out-Null
             Write-OK "Disabled task: $task"
         } catch {
             Write-Warn "Task not found or already disabled: $task"
